@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tweet Scraper and Sentiment Analysis System</title>
+
+    <!-- Google Fonts for Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- CSS Styles -->
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f5fc;
+            color: #444;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2 {
+            color: #2c2c54;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom: 4px solid #4e00c2;
+        }
+
+        header h1 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+        }
+
+        header p {
+            font-size: 1.2em;
+            font-weight: 400;
+        }
+
+        /* Main Container */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 50px auto;
+        }
+
+        /* Dashboard Layout */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        section h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Sentiment & Risk Styling */
+        .sentiment-level {
+            background-color: #6a11cb;
+            color: white;
+            font-weight: bold;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .risk-alert {
+            color: white;
+            font-weight: bold;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .low-risk {
+            background-color: #2ecc71;
+        }
+
+        .medium-risk {
+            background-color: #f1c40f;
+        }
+
+        .high-risk {
+            background-color: #e74c3c;
+        }
+
+        /* Trending Hashtags */
+        .hashtags ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .hashtags ul li {
+            font-size: 1.2em;
+            margin: 12px 0;
+            color: #6a11cb;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .hashtags ul li:hover {
+            color: #4e00c2;
+        }
+
+        /* Recent Tweets Section */
+        .tweets {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .tweet {
+            display: flex;
+            align-items: flex-start;
+            background: #f9f9fb;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .tweet:hover {
+            background: #fff;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .tweet img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .tweet p {
+            font-size: 1.1em;
+            margin: 0;
+            color: #555;
+        }
+
+        .tweet strong {
+            font-size: 1.1em;
+            color: #333;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #4e00c2;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+            font-size: 0.9em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Tweet Scraper and Sentiment Analysis System</h1>
+        <p>Analyze financial risks and market trends using Twitter data!</p>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="dashboard">
+            <section>
+                <h2>Market Sentiment</h2>
+                <div class="sentiment-level">Enter Your #tag</div>
+            </section>
+
+            <section>
+                <h2>Risk Analysis</h2>
+                <div class="risk-alert low-risk">Low Risk</div>
+                <div class="risk-alert medium-risk">Medium Risk</div>
+                <div class="risk-alert high-risk">High Risk</div>
+            </section>
+        </div>
+
+        <!-- Trending Hashtags -->
+        <section class="hashtags">
+            <h2>Trending Hashtags</h2>
+            <ul>
+                <li>#stocks</li>
+                <li>#crypto</li>
+                <li>#marketcrash</li>
+                <li>#investing</li>
+                <li>#economy</li>
+            </ul>
+        </section>
+
+        <!-- Recent Tweets Section -->
+        <section class="tweets">
+            <h2>Recent Tweets</h2>
+            <div class="tweet">
+                <img src="https://via.placeholder.com/50" alt="User">
+                <p><strong>@Dharmik07:</strong> "The stock market is looking strong today! #stocks #bullmarket"</p>
+            </div>
+            <div class="tweet">
+                <img src="https://via.placeholder.com/50" alt="User">
+                <p><strong>@Dharmil62:</strong> "Crypto is showing signs of volatility, be careful! #crypto #marketcrash"</p>
+            </div>
+            <div class="tweet">
+                <img src="https://via.placeholder.com/50" alt="User">
+                <p><strong>@Yatin36:</strong> "Investing in stocks seems risky right now due to market fluctuations. #stocks"</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Tweet Scraper and Sentiment Analysis System</p>
+    </footer>
+</body>
+</html>
